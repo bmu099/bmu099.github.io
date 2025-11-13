@@ -1,2 +1,1 @@
-# bmu099.github.io
-Personal 
+# My website
