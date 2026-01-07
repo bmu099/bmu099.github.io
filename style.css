@@ -80,19 +80,26 @@ body::after {
 }
 
 .profile-photo-container {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 16px;                  /* Slightly softer corners */
     overflow: hidden;
-    margin-bottom: 20px;
-    border: 2px solid var(--accent-blue);
+    margin-bottom: 40px;
+    border: 3px solid var(--accent-blue);
     box-shadow: var(--glow-blue);
+    background: #1f2937;                  /* Dark gray fallback background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .profile-photo {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover;                    /* Ensures the photo fills the frame nicely */
+    object-position: center;              /* Centers the face if cropped */
+    display: block;
 }
 
 .sidebar h1 {
