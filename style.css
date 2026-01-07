@@ -2,15 +2,16 @@
 
 /* === Global Variables for Cyberpunk Theme === */
 :root {
-    --bg-dark: #0a0a1f;           /* Deep space black */
-    --bg-main: #12122a;           /* Dark purple-blue */
-    --accent-neon-cyan: #00ffff;  /* Electric cyan */
-    --accent-neon-pink: #ff00ff;   /* Hot magenta pink */
-    --accent-neon-yellow: #fcee0c; /* Cyber yellow */
-    --text-primary: #e0e0ff;      /* Light futuristic blue-white */
+    --bg-dark: #0a0a1f;
+    --bg-main: #12122a;
+    --accent-neon-cyan: #00ffff;
+    --accent-neon-pink: #ff00ff;
+    --accent-neon-yellow: #fcee0c;
+    --text-primary: #e0e0ff;
     --text-secondary: #a0a0ff;
     --glow-cyan: 0 0 10px #00ffff, 0 0 20px #00ffff;
     --glow-pink: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    --glow-yellow: 0 0 10px #fcee0c, 0 0 20px #fcee0c;
 }
 
 /* === Base layout === */
@@ -24,9 +25,9 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    /* cursor: none; */ /* Uncomment if you want to fully hide the default cursor */
 }
 
-/* Subtle animated background scan lines for cyberpunk feel */
 body::before {
     content: '';
     position: absolute;
@@ -41,14 +42,13 @@ body::before {
     100% { transform: translateY(100px); }
 }
 
-/* === Main layout === */
+/* === Layout === */
 .main-layout {
     display: flex;
     flex-direction: row;
     min-height: 100vh;
 }
 
-/* === Sidebar === */
 .sidebar {
     width: 280px;
     background: linear-gradient(to bottom, #1a0033, var(--bg-main));
@@ -99,57 +99,12 @@ body::before {
     animation: glitch-text 5s infinite;
 }
 
-.sidebar-nav {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.sidebar-nav a {
-    text-decoration: none;
-    color: var(--accent-neon-cyan);
-    font-weight: bold;
-    font-size: 18px;
-    margin: 10px 0;
-    padding: 10px;
-    transition: all 0.3s;
-    position: relative;
-}
-
-.sidebar-nav a:hover {
-    color: var(--accent-neon-pink);
-    text-shadow: var(--glow-pink);
-    transform: translateX(10px);
-}
-
-/* Simple glitch animation for headings/links */
 @keyframes glitch-text {
     0%, 100% { text-shadow: var(--glow-cyan); }
     2% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; }
     4% { text-shadow: none; }
 }
 
-/* Social & other elements */
-.social-links {
-    margin-top: auto;
-    display: flex;
-    gap: 15px;
-}
-
-.social-icon {
-    width: 30px;
-    height: 30px;
-    filter: brightness(0) invert(1);
-    transition: all 0.3s;
-}
-
-.social-icon:hover {
-    filter: hue-rotate(90deg) brightness(1.5);
-    transform: scale(1.2);
-}
-
-/* === Main container === */
 .container {
     flex: 1;
     padding: 40px;
@@ -159,7 +114,6 @@ body::before {
     gap: 40px;
 }
 
-/* === Content box === */
 .content-box {
     background: rgba(20, 20, 50, 0.6);
     backdrop-filter: blur(10px);
@@ -187,30 +141,10 @@ body::before {
     animation: glitch-text 6s infinite;
 }
 
-.content-box p,
-.content-box ul {
+.content-box p {
     font-size: 17px;
     line-height: 1.8;
     color: var(--text-secondary);
-}
-
-.content-box ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.content-box li {
-    margin: 10px 0;
-    padding-left: 25px;
-    position: relative;
-}
-
-.content-box li::before {
-    content: ">";
-    color: var(--accent-neon-cyan);
-    font-weight: bold;
-    position: absolute;
-    left: 0;
 }
 
 .content-box a {
@@ -225,58 +159,12 @@ body::before {
     text-shadow: var(--glow-cyan);
 }
 
-/* === Visit my office === */
-.visit-office {
-    text-align: center;
-    margin-top: 80px;
-    font-size: 20px;
-    color: var(--accent-neon-cyan);
-}
-
-.arrow-link {
-    color: var(--accent-neon-pink);
-    font-size: 36px;
-    transition: all 0.4s;
-}
-
-.arrow-link:hover {
-    color: var(--accent-neon-yellow);
-    text-shadow: var(--glow-yellow);
-    transform: translateX(20px);
-}
-
-/* === Abstract toggle === */
-.show-abstract {
-    color: var(--accent-neon-cyan);
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.show-abstract:hover {
-    color: var(--accent-neon-pink);
-}
-
-/* === Responsive === */
-@media (max-width: 768px) {
-    .main-layout {
-        flex-direction: column;
-    }
-    .sidebar {
-        width: 100%;
-        padding: 20px;
-    }
-    .container {
-        padding: 20px;
-    }
-}
-
+/* === Mouse Trail === */
 .mouse-trail {
     position: absolute;
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--accent-neon-cyan);
-    box-shadow: var(--glow-cyan);
     pointer-events: none;
     transform: translate(-50%, -50%);
     animation: fade-out 1s ease-out forwards;
@@ -294,7 +182,16 @@ body::before {
     }
 }
 
-/* Optional: Hide default cursor for full cyberpunk immersion */
-body {
-    cursor: none; /* Uncomment if you want to hide the default arrow cursor */
+/* === Responsive === */
+@media (max-width: 768px) {
+    .main-layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        padding: 20px;
+    }
+    .container {
+        padding: 20px;
+    }
 }
