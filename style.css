@@ -80,11 +80,11 @@ body::after {
 }
 
 .profile-photo-container {
-    width: 200px;
-    height: 200px;
-    border-radius: 12px;  /* Softer than circle */
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
     overflow: hidden;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     border: 2px solid var(--accent-blue);
     box-shadow: var(--glow-blue);
 }
