@@ -177,6 +177,16 @@ body::after {
 }
 
 /* ... (keep all your existing sidebar, content-box, mouse-trail styles exactly as before) ... */
+.container {
+    flex: 1;
+    padding: 40px 80px 40px 40px;  /* Increased right padding, kept left moderate */
+    background: rgba(10, 10, 31, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-left: 50px;  /* This is the key: pushes the entire container right */
+}
+
 .content-box {
     background: rgba(20, 20, 50, 0.6);
     backdrop-filter: blur(10px);
