@@ -1,11 +1,47 @@
-/* === Base layout === */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400&display=swap');
+
+/* === Global Variables for Cyberpunk Theme === */
+:root {
+    --bg-dark: #0a0a1f;           /* Deep space black */
+    --bg-main: #12122a;           /* Dark purple-blue */
+    --accent-neon-cyan: #00ffff;  /* Electric cyan */
+    --accent-neon-pink: #ff00ff;   /* Hot magenta pink */
+    --accent-neon-yellow: #fcee0c; /* Cyber yellow */
+    --text-primary: #e0e0ff;      /* Light futuristic blue-white */
+    --text-secondary: #a0a0ff;
+    --glow-cyan: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    --glow-pink: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
 }
 
+/* === Base layout === */
+body {
+    font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-dark);
+    background-image: linear-gradient(to bottom, #0a0a1f, #1a1a3a);
+    color: var(--text-primary);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Subtle animated background scan lines for cyberpunk feel */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, rgba(0,255,255,0.03) 0px, transparent 1px, transparent 4px);
+    pointer-events: none;
+    animation: scanlines 20s linear infinite;
+}
+
+@keyframes scanlines {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100px); }
+}
+
+/* === Main layout === */
 .main-layout {
     display: flex;
     flex-direction: row;
@@ -14,34 +50,53 @@ body {
 
 /* === Sidebar === */
 .sidebar {
-    width: 250px;
-    background-color: rgb(16, 38, 59);
-    color: white;
-    padding: 20px;
+    width: 280px;
+    background: linear-gradient(to bottom, #1a0033, var(--bg-main));
+    color: var(--text-primary);
+    padding: 40px 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-right: 2px solid var(--accent-neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
 
 .profile-photo-container {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    border: 3px solid var(--accent-neon-cyan);
+    box-shadow: var(--glow-cyan);
+    animation: pulse-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+    from { box-shadow: var(--glow-cyan); }
+    to { box-shadow: 0 0 30px #00ffff, 0 0 50px #00ffff; }
 }
 
 .profile-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.sidebar:hover .profile-photo {
+    transform: scale(1.1);
 }
 
 .sidebar h1 {
-    font-size: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    color: var(--accent-neon-yellow);
+    text-shadow: var(--glow-cyan);
+    animation: glitch-text 5s infinite;
 }
 
 .sidebar-nav {
@@ -53,78 +108,90 @@ body {
 
 .sidebar-nav a {
     text-decoration: none;
-    color: white;
+    color: var(--accent-neon-cyan);
     font-weight: bold;
-    margin: 5px 0;
+    font-size: 18px;
+    margin: 10px 0;
+    padding: 10px;
+    transition: all 0.3s;
+    position: relative;
 }
 
 .sidebar-nav a:hover {
-    text-decoration: underline;
+    color: var(--accent-neon-pink);
+    text-shadow: var(--glow-pink);
+    transform: translateX(10px);
 }
 
-.address-container {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+/* Simple glitch animation for headings/links */
+@keyframes glitch-text {
+    0%, 100% { text-shadow: var(--glow-cyan); }
+    2% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; }
+    4% { text-shadow: none; }
 }
 
-.location {
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    color: #fff;
-}
-
+/* Social & other elements */
 .social-links {
     margin-top: auto;
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .social-icon {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1);
+    transition: all 0.3s;
 }
 
-.social-icon.invert {
-    filter: invert(1);
+.social-icon:hover {
+    filter: hue-rotate(90deg) brightness(1.5);
+    transform: scale(1.2);
 }
 
 /* === Main container === */
 .container {
     flex: 1;
-    padding: 20px 40px;
-    background-color: #f4f4f4;
+    padding: 40px;
+    background: rgba(10, 10, 31, 0.8);
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    box-sizing: border-box;
+    gap: 40px;
 }
 
 /* === Content box === */
 .content-box {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
+    background: rgba(20, 20, 50, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--accent-neon-cyan);
+    box-shadow: var(--glow-cyan), inset 0 0 20px rgba(0, 255, 255, 0.1);
+    max-width: 900px;
     width: 100%;
     margin: 0 auto;
-    text-align: left;
+    transition: all 0.4s;
+}
+
+.content-box:hover {
+    box-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff;
+    transform: translateY(-5px);
 }
 
 .content-box h2 {
-    color: rgb(16, 38, 59);
-    margin-top: 0;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--accent-neon-yellow);
     text-align: center;
+    font-size: 32px;
+    text-shadow: var(--glow-pink);
+    animation: glitch-text 6s infinite;
 }
 
 .content-box p,
 .content-box ul {
-    margin: 15px 0;
-    font-size: 16px;
-    line-height: 1.6;
-    text-align: left;
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-secondary);
 }
 
 .content-box ul {
@@ -133,78 +200,60 @@ body {
 }
 
 .content-box li {
-    margin: 5px 0;
+    margin: 10px 0;
+    padding-left: 25px;
     position: relative;
-    padding-left: 20px;
 }
 
 .content-box li::before {
-    content: "•";
-    color: rgb(16, 38, 59);
+    content: ">";
+    color: var(--accent-neon-cyan);
     font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    text-align: center;
+    position: absolute;
+    left: 0;
 }
 
 .content-box a {
-    color: rgb(16, 38, 59);
+    color: var(--accent-neon-pink);
     text-decoration: none;
     font-weight: bold;
+    transition: all 0.3s;
 }
 
 .content-box a:hover {
-    text-decoration: underline;
-}
-
-.content-box strong,
-.content-box b {
-    color: rgb(16, 38, 59);
+    color: var(--accent-neon-cyan);
+    text-shadow: var(--glow-cyan);
 }
 
 /* === Visit my office === */
 .visit-office {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    color: rgb(16, 38, 59);
     text-align: center;
-    background-color: transparent;
-    padding: 10px;
-    margin-top: 60px; /* Augmentez cette valeur pour déplacer le lien plus bas */
+    margin-top: 80px;
+    font-size: 20px;
+    color: var(--accent-neon-cyan);
 }
 
 .arrow-link {
-    text-decoration: none;
-    font-size: 24px;
-    margin: 0 15px;
-    color: rgb(16, 38, 59);
-    transition: color 0.3s ease;
+    color: var(--accent-neon-pink);
+    font-size: 36px;
+    transition: all 0.4s;
 }
 
 .arrow-link:hover {
-    color: rgb(0, 123, 255);
+    color: var(--accent-neon-yellow);
+    text-shadow: var(--glow-yellow);
+    transform: translateX(20px);
 }
 
 /* === Abstract toggle === */
-.abstract {
-    display: none;
-    margin-top: 10px;
-}
-
 .show-abstract {
-    color: #28a745;
+    color: var(--accent-neon-cyan);
     cursor: pointer;
     text-decoration: underline;
 }
 
 .show-abstract:hover {
-    color: #218838;
-}
-
-.poster-text {
-    margin-top: 10px;
+    color: var(--accent-neon-pink);
 }
 
 /* === Responsive === */
@@ -212,27 +261,11 @@ body {
     .main-layout {
         flex-direction: column;
     }
-
     .sidebar {
         width: 100%;
-        height: auto;
-        padding: 15px;
+        padding: 20px;
     }
-
     .container {
-        padding: 15px;
-    }
-
-    .content-box {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .visit-office {
-        flex-direction: column;
-    }
-
-    .arrow-link {
-        margin: 10px 0;
+        padding: 20px;
     }
 }
