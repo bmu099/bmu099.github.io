@@ -1,61 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-</head>
-    <title>Home</title>
+    <title>Boyang Mu</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your stylesheet -->
     <link rel="stylesheet" href="style.css">
-    <title>My GitHub Pages Site</title>
+</head>
 <body>
     <div class="main-layout">
+        <!-- Sidebar -->
         <div class="sidebar">
             <div class="profile-photo-container">
-                <img src="profile_1.png" class="profile-photo">
+                <img src="profile_1.png" alt="Profile photo" class="profile-photo">
             </div>
             <h1>Boyang Mu</h1>
             <div class="address-container">
                 <p class="location">
-                    Crest, ENSAE, office 4077 91120 Palaiseau, France
+                    Crest, ENSAE, office 4077<br>
+                    91120 Palaiseau, France
                 </p>
             </div>
-         </div>
+
+            <!-- You can add navigation or social links here later -->
+        </div>
+
+        <!-- Main content -->
         <div class="container">
             <div class="content-box">
                 <h2>About me</h2>
-                <p> I am a 2nd year PhD at CREST, Institut Polytechnique de Paris under the supervision of <a href="https://sites.google.com/site/julienpratecon/home" target="_blank">Julien Prat</a>. 
+                <p>
+                    I am a 2nd year PhD at CREST, Institut Polytechnique de Paris under the supervision of
+                    <a href="https://sites.google.com/site/julienpratecon/home" target="_blank">Julien Prat</a>.
+                </p>
+                <p>This is a simple example page.</p>
             </div>
-    <p>This is a simple example page.</p>
+        </div>
     </div>
 
-<script>
-const trailCount = 20; // Maximum number of trail particles (adjust for performance)
-let trails = [];
+    <!-- Mouse trail script (must be at the end of body) -->
+    <script>
+        const trailCount = 20;
+        let trails = [];
 
-document.addEventListener('mousemove', (e) => {
-    const trail = document.createElement('div');
-    trail.classList.add('mouse-trail');
-    trail.style.left = `${e.pageX}px`;
-    trail.style.top = `${e.pageY}px`;
+        document.addEventListener('mousemove', (e) => {
+            const trail = document.createElement('div');
+            trail.classList.add('mouse-trail');
 
-    // Randomize color between cyan and pink for extra cyberpunk vibe
-    const colors = ['var(--accent-neon-cyan)', 'var(--accent-neon-pink)', 'var(--accent-neon-yellow)'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    trail.style.background = randomColor;
-    trail.style.boxShadow = randomColor === 'var(--accent-neon-cyan)' ? 'var(--glow-cyan)' :
-                            randomColor === 'var(--accent-neon-pink)' ? 'var(--glow-pink)' :
-                            '0 0 10px var(--accent-neon-yellow), 0 0 20px var(--accent-neon-yellow)';
+            trail.style.left = `${e.pageX}px`;
+            trail.style.top = `${e.pageY}px`;
 
-    document.body.appendChild(trail);
-    trails.push(trail);
+            // Random neon color
+            const colors = ['var(--accent-neon-cyan)', 'var(--accent-neon-pink)', 'var(--accent-neon-yellow)'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
-    // Remove old trails to prevent too many elements
-    if (trails.length > trailCount) {
-        const oldTrail = trails.shift();
-        oldTrail.remove();
-    }
-});
-</script>        
+            trail.style.background = randomColor;
+
+            if (randomColor === 'var(--accent-neon-cyan)') {
+                trail.style.boxShadow = 'var(--glow-cyan)';
+            } else if (randomColor === 'var(--accent-neon-pink)') {
+                trail.style.boxShadow = 'var(--glow-pink)';
+            } else {
+                trail.style.boxShadow = '0 0 10px var(--accent-neon-yellow), 0 0 20px var(--accent-neon-yellow)';
+            }
+
+            document.body.appendChild(trail);
+            trails.push(trail);
+
+            // Clean up old trails
+            if (trails.length > trailCount) {
+                const oldTrail = trails.shift();
+                oldTrail.remove();
+            }
+        });
+    </script>
 </body>
 </html>
