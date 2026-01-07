@@ -177,18 +177,9 @@ body::after {
 }
 
 /* ... (keep all your existing sidebar, content-box, mouse-trail styles exactly as before) ... */
-.container {
-    flex: 1;
-    padding: 40px;
-    background: rgba(10, 10, 31, 0.3);  /* Much more transparent */
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
 .content-box {
-    background: rgba(20, 20, 50, 0.4);    /* Reduced opacity */
-    backdrop-filter: blur(12px);          /* Stronger blur for depth */
+    background: rgba(20, 20, 50, 0.6);
+    backdrop-filter: blur(10px);
     padding: 30px;
     border-radius: 12px;
     border: 1px solid var(--accent-neon-cyan);
@@ -200,9 +191,55 @@ body::after {
 }
 
 .content-box:hover {
-    background: rgba(20, 20, 50, 0.6);    /* Slightly more solid on hover */
-    box-shadow: 0 0 40px #00ffff, 0 0 80px #00ffff;
-    transform: translateY(-8px);
+    box-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff;
+    transform: translateY(-5px);
+}
+
+.content-box h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--accent-neon-yellow);
+    text-align: center;
+    font-size: 32px;
+    text-shadow: var(--glow-pink);
+    animation: glitch-text 6s infinite;
+}
+
+.content-box p,
+.content-box ul {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+.content-box ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.content-box li {
+    margin: 10px 0;
+    padding-left: 25px;
+    position: relative;
+}
+
+.content-box li::before {
+    content: ">";
+    color: var(--accent-neon-cyan);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.content-box a {
+    color: var(--accent-neon-pink);
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.content-box a:hover {
+    color: var(--accent-neon-cyan);
+    text-shadow: var(--glow-cyan);
 }
 
 /* Optional: Make text slightly brighter for better contrast on transparent bg */
