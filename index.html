@@ -28,5 +28,34 @@
             </div>
     <p>This is a simple example page.</p>
     </div>
+
+<script>
+const trailCount = 20; // Maximum number of trail particles (adjust for performance)
+let trails = [];
+
+document.addEventListener('mousemove', (e) => {
+    const trail = document.createElement('div');
+    trail.classList.add('mouse-trail');
+    trail.style.left = `${e.pageX}px`;
+    trail.style.top = `${e.pageY}px`;
+
+    // Randomize color between cyan and pink for extra cyberpunk vibe
+    const colors = ['var(--accent-neon-cyan)', 'var(--accent-neon-pink)', 'var(--accent-neon-yellow)'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    trail.style.background = randomColor;
+    trail.style.boxShadow = randomColor === 'var(--accent-neon-cyan)' ? 'var(--glow-cyan)' :
+                            randomColor === 'var(--accent-neon-pink)' ? 'var(--glow-pink)' :
+                            '0 0 10px var(--accent-neon-yellow), 0 0 20px var(--accent-neon-yellow)';
+
+    document.body.appendChild(trail);
+    trails.push(trail);
+
+    // Remove old trails to prevent too many elements
+    if (trails.length > trailCount) {
+        const oldTrail = trails.shift();
+        oldTrail.remove();
+    }
+});
+</script>        
 </body>
 </html>
