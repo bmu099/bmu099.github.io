@@ -269,3 +269,32 @@ body::before {
         padding: 20px;
     }
 }
+
+.mouse-trail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-neon-cyan);
+    box-shadow: var(--glow-cyan);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: fade-out 1s ease-out forwards;
+    z-index: 9999;
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+}
+
+/* Optional: Hide default cursor for full cyberpunk immersion */
+body {
+    cursor: none; /* Uncomment if you want to hide the default arrow cursor */
+}
