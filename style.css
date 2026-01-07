@@ -1,68 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500&display=swap');
 
-/* === Global Variables === */
+/* === Refined Color Palette: Tech/Science/AI/Blockchain Inspired === */
 :root {
-    --bg-dark: #0a0a1f;
-    --bg-main: #12122a;
-    --accent-neon-cyan: #00ffff;
-    --accent-neon-pink: #ff00ff;
-    --accent-neon-yellow: #fcee0c;
-    --text-primary: #e0e0ff;
-    --text-secondary: #a0a0ff;
-    --glow-cyan: 0 0 10px #00ffff, 0 0 20px #00ffff;
-    --glow-pink: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
-    --glow-yellow: 0 0 10px #fcee0c, 0 0 20px #fcee0c;
+    --bg-dark: #0d1117;              /* Deep GitHub-like dark */
+    --bg-main: #161b22;              /* Slightly lighter for depth */
+    --accent-blue: #58a6ff;           /* Clean tech blue (like GitHub/Code) */
+    --accent-cyan: #39c5bb;           /* Subtle blockchain-inspired cyan */
+    --accent-purple: #a28bff;         /* AI/futuristic purple */
+    --text-primary: #f0f6fc;          /* Crisp light text */
+    --text-secondary: #8b949e;
+    --glow-blue: 0 0 10px #58a6ff, 0 0 20px #58a6ff;
+    --glow-cyan: 0 0 10px #39c5bb, 0 0 20px #39c5bb;
 }
 
 /* === Base === */
 body {
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto Mono', monospace;
     background-color: var(--bg-dark);
-    background-image: linear-gradient(to bottom, #0a0a1f, #1a1a3a);
     color: var(--text-primary);
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
 }
 
-/* Scan lines */
+/* Subtle grid background – evokes blockchain ledger / data matrix */
 body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background: repeating-linear-gradient(0deg, rgba(0,255,255,0.03), transparent 1px, transparent 4px);
+    background-image: 
+        linear-gradient(rgba(88, 166, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(88, 166, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
     pointer-events: none;
-    animation: scanlines 20s linear infinite;
-    z-index: 0;
+    z-index: -2;
 }
 
-@keyframes scanlines {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(100px); }
-}
-
-/* Dark overlay to keep animation subtle */
+/* Dark overlay for depth */
 body::after {
     content: '';
     position: fixed;
     inset: 0;
-    background: rgba(10, 10, 31, 0.45);
+    background: rgba(13, 17, 23, 0.5);
     pointer-events: none;
     z-index: -1;
 }
 
-/* === Blockchain Canvas === */
+/* === Blockchain Canvas – more subtle & scientific === */
 #blockchain-bg {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     width: 100vw;
     height: 100vh;
     z-index: -2;
+    opacity: 0.6;  /* Visible but not overwhelming */
     pointer-events: none;
-    opacity: 0.7;
 }
 
 /* === Layout === */
@@ -74,210 +68,110 @@ body::after {
     z-index: 1;
 }
 
-/* Sidebar & Content styles (unchanged from previous working version) */
-/* === Sidebar === */
 .sidebar {
-    width: 280px;
-    background: linear-gradient(to bottom, #1a0033, var(--bg-main));
-    color: var(--text-primary);
-    padding: 40px 20px;
-    box-sizing: border-box;
+    width: 300px;
+    background: rgba(22, 27, 34, 0.7);
+    backdrop-filter: blur(12px);
+    padding: 60px 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-right: 2px solid var(--accent-neon-cyan);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    border-right: 1px solid rgba(88, 166, 255, 0.2);
 }
 
 .profile-photo-container {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;  /* Softer than circle */
     overflow: hidden;
-    margin-bottom: 30px;
-    border: 3px solid var(--accent-neon-cyan);
-    box-shadow: var(--glow-cyan);
-    animation: pulse-glow 4s ease-in-out infinite alternate;
-}
-
-@keyframes pulse-glow {
-    from { box-shadow: var(--glow-cyan); }
-    to { box-shadow: 0 0 30px #00ffff, 0 0 50px #00ffff; }
-}
-
-.profile-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-}
-
-.sidebar:hover .profile-photo {
-    transform: scale(1.1);
+    margin-bottom: 40px;
+    border: 2px solid var(--accent-blue);
+    box-shadow: var(--glow-blue);
 }
 
 .sidebar h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 28px;
-    text-align: center;
+    font-size: 32px;
+    color: var(--accent-blue);
+    text-shadow: var(--glow-blue);
     margin-bottom: 30px;
-    color: var(--accent-neon-yellow);
-    text-shadow: var(--glow-cyan);
-    animation: glitch-text 5s infinite;
 }
 
-.sidebar-nav {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.location {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.6;
 }
 
-.sidebar-nav a {
-    text-decoration: none;
-    color: var(--accent-neon-cyan);
-    font-weight: bold;
-    font-size: 18px;
-    margin: 10px 0;
-    padding: 10px;
-    transition: all 0.3s;
-    position: relative;
-}
-
-.sidebar-nav a:hover {
-    color: var(--accent-neon-pink);
-    text-shadow: var(--glow-pink);
-    transform: translateX(10px);
-}
-
-/* Simple glitch animation for headings/links */
-@keyframes glitch-text {
-    0%, 100% { text-shadow: var(--glow-cyan); }
-    2% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; }
-    4% { text-shadow: none; }
-}
-
-/* Social & other elements */
-.social-links {
-    margin-top: auto;
-    display: flex;
-    gap: 15px;
-}
-
-.social-icon {
-    width: 30px;
-    height: 30px;
-    filter: brightness(0) invert(1);
-    transition: all 0.3s;
-}
-
-.social-icon:hover {
-    filter: hue-rotate(90deg) brightness(1.5);
-    transform: scale(1.2);
-}
-
-/* ... (keep all your existing sidebar, content-box, mouse-trail styles exactly as before) ... */
 .container {
     flex: 1;
-    padding: 40px 80px 40px 40px;  /* Increased right padding, kept left moderate */
-    background: rgba(10, 10, 31, 0.3);
+    padding: 60px 100px 60px 60px;  /* Slight rightward shift */
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    margin-left: 50px;  /* This is the key: pushes the entire container right */
+    gap: 50px;
 }
 
 .content-box {
-    background: rgba(20, 20, 50, 0.6);
-    backdrop-filter: blur(10px);
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid var(--accent-neon-cyan);
-    box-shadow: var(--glow-cyan), inset 0 0 20px rgba(0, 255, 255, 0.1);
+    background: rgba(22, 27, 34, 0.6);
+    backdrop-filter: blur(16px);
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(88, 166, 255, 0.3);
+    box-shadow: var(--glow-blue);
     max-width: 900px;
     width: 100%;
     margin: 0 auto;
+    margin-left: 60px;  /* Extra rightward push */
     transition: all 0.4s;
 }
 
 .content-box:hover {
-    box-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff;
-    transform: translateY(-5px);
+    background: rgba(22, 27, 34, 0.8);
+    box-shadow: 0 0 30px #58a6ff, 0 0 60px #58a6ff;
+    transform: translateY(-10px);
 }
 
 .content-box h2 {
     font-family: 'Orbitron', sans-serif;
-    color: var(--accent-neon-yellow);
-    text-align: center;
-    font-size: 32px;
-    text-shadow: var(--glow-pink);
-    animation: glitch-text 6s infinite;
+    font-size: 36px;
+    color: var(--accent-blue);
+    text-align: left;
+    margin-bottom: 20px;
+    text-shadow: var(--glow-cyan);
 }
 
-.content-box p,
-.content-box ul {
-    font-size: 17px;
+.content-box p {
+    font-size: 18px;
     line-height: 1.8;
-    color: var(--text-secondary);
+    color: var(--text-primary);
 }
 
-.content-box ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.content-box li {
-    margin: 10px 0;
-    padding-left: 25px;
-    position: relative;
-}
-
-.content-box li::before {
-    content: ">";
-    color: var(--accent-neon-cyan);
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-}
-
+/* Links */
 .content-box a {
-    color: var(--accent-neon-pink);
+    color: var(--accent-cyan);
     text-decoration: none;
-    font-weight: bold;
+    border-bottom: 1px solid transparent;
     transition: all 0.3s;
 }
 
 .content-box a:hover {
-    color: var(--accent-neon-cyan);
-    text-shadow: var(--glow-cyan);
+    color: var(--accent-purple);
+    border-bottom: 1px solid var(--accent-purple);
 }
 
-/* Optional: Make text slightly brighter for better contrast on transparent bg */
-.content-box p,
-.content-box ul {
-    color: #f0f0ff;  /* Brighter than --text-secondary */
-    text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);  /* Subtle glow for readability */
-}
-
-/* Mouse Trail (keep exactly) */
+/* Mouse trail – toned down */
 .mouse-trail {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    animation: fade-out 1s ease-out forwards;
-    z-index: 9999;
-}
-
-@keyframes fade-out {
-    to { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+    width: 8px;
+    height: 8px;
+    background: var(--accent-blue);
+    box-shadow: var(--glow-blue);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .main-layout { flex-direction: column; }
-    .sidebar { width: 100%; padding: 20px; }
-    .container { padding: 20px; }
+    .sidebar { width: 100%; padding: 30px; }
+    .container { padding: 30px; margin-left: 0; }
+    .content-box { margin-left: 0; }
 }
