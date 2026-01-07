@@ -1,5 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boyang Mu</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-    <!-- Blockchain background canvas - now properly behind everything -->
+    <!-- Full-screen canvas for blockchain animation (background) -->
     <canvas id="blockchain-bg"></canvas>
 
     <div class="main-layout">
@@ -30,9 +43,9 @@
         </div>
     </div>
 
-    <!-- Scripts (mouse trail + blockchain animation) -->
+    <!-- All JavaScript at the end -->
     <script>
-        // Mouse trail script (unchanged)
+        /* ===== Mouse Trail ===== */
         const trailCount = 20;
         let trails = [];
 
@@ -51,19 +64,18 @@
             } else if (randomColor === 'var(--accent-neon-pink)') {
                 trail.style.boxShadow = 'var(--glow-pink)';
             } else {
-                trail.style.boxShadow = '0 0 10px var(--accent-neon-yellow), 0 0 20px var(--accent-neon-yellow)';
+                trail.style.boxShadow = 'var(--glow-yellow)';
             }
 
             document.body.appendChild(trail);
             trails.push(trail);
 
             if (trails.length > trailCount) {
-                const oldTrail = trails.shift();
-                oldTrail.remove();
+                trails.shift().remove();
             }
         });
 
-        // Blockchain background animation (unchanged from previous version)
+        /* ===== Blockchain Background Animation ===== */
         const canvas = document.getElementById('blockchain-bg');
         const ctx = canvas.getContext('2d');
 
@@ -75,7 +87,7 @@
         resizeCanvas();
 
         class Block {
-            constructor(x, y, size) {
+            constructor(x, y, size = 40) {
                 this.x = x;
                 this.y = y;
                 this.size = size;
@@ -84,13 +96,15 @@
                 this.speed = Math.random() * 0.5 + 0.2;
             }
             draw() {
-                ctx.fillStyle = this.color + '33';
+                ctx.fillStyle = this.color + '40';
                 ctx.shadowColor = this.color;
-                ctx.shadowBlur = 10;
+                ctx.shadowBlur = 15;
                 ctx.fillRect(this.x, this.y, this.size, this.size);
-                ctx.font = '10px Roboto Mono';
+
+                ctx.font = '11px "Roboto Mono"';
                 ctx.fillStyle = this.color;
-                ctx.fillText(this.hash, this.x + 5, this.y + this.size / 2);
+                ctx.fillText(this.hash.substring(0, 8), this.x + 6, this.y + this.size / 2 + 4);
+
                 ctx.shadowBlur = 0;
             }
             update() {
@@ -105,20 +119,23 @@
 
         class Particle {
             constructor() {
+                this.reset();
+                this.size = Math.random() * 3 + 1;
+                this.color = Math.random() > 0.5 ? '#fcee0c' : '#00ffff';
+                this.speed = Math.random() * 0.01 + 0.005;
+            }
+            reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.targetX = Math.random() * canvas.width;
                 this.targetY = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.color = Math.random() > 0.5 ? '#fcee0c' : '#00ffff';
-                this.speed = Math.random() * 0.01 + 0.005;
             }
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
                 ctx.shadowColor = this.color;
-                ctx.shadowBlur = 5;
+                ctx.shadowBlur = 8;
                 ctx.fill();
                 ctx.shadowBlur = 0;
             }
@@ -127,27 +144,25 @@
                 const dy = this.targetY - this.y;
                 this.x += dx * this.speed;
                 this.y += dy * this.speed;
-                if (Math.abs(dx) < 1 && Math.abs(dy) < 1) {
-                    this.targetX = Math.random() * canvas.width;
-                    this.targetY = Math.random() * canvas.height;
-                }
+                if (Math.abs(dx) < 2 && Math.abs(dy) < 2) this.reset();
             }
         }
 
         const blocks = [];
         const particles = [];
-        for (let i = 0; i < 10; i++) {
-            blocks.push(new Block(Math.random() * canvas.width, Math.random() * canvas.height, 40));
+        for (let i = 0; i < 12; i++) {
+            blocks.push(new Block(Math.random() * canvas.width, Math.random() * canvas.height - 200));
         }
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 60; i++) {
             particles.push(new Particle());
         }
 
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            ctx.strokeStyle = '#00ffff33';
-            ctx.lineWidth = 2;
+            // Draw faint connections between blocks
+            ctx.strokeStyle = '#00ffff22';
+            ctx.lineWidth = 1.5;
             for (let i = 0; i < blocks.length - 1; i++) {
                 ctx.beginPath();
                 ctx.moveTo(blocks[i].x + blocks[i].size / 2, blocks[i].y + blocks[i].size / 2);
@@ -155,8 +170,8 @@
                 ctx.stroke();
             }
 
-            blocks.forEach(block => { block.update(); block.draw(); });
-            particles.forEach(particle => { particle.update(); particle.draw(); });
+            blocks.forEach(b => { b.update(); b.draw(); });
+            particles.forEach(p => { p.update(); p.draw(); });
 
             requestAnimationFrame(animate);
         }
@@ -164,3 +179,4 @@
         animate();
     </script>
 </body>
+</html>
